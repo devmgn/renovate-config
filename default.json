@@ -3,7 +3,6 @@
   "extends": [
     ":timezone(Asia/Tokyo)",
     "config:best-practices",
-    "customManagers:biomeVersions",
     "customManagers:githubActionsVersions"
   ],
   "dependencyDashboard": true,
