@@ -9,7 +9,7 @@ Renovate共通設定プリセット
 ```json
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>mgn/renovate-config"]
+  "extends": ["github>devmgn/renovate-config"]
 }
 ```
 
