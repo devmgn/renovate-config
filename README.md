@@ -21,6 +21,9 @@ Renovate共通設定プリセット
 - **platformAutomerge**: 有効（GitHub native automerge使用）
 - **ラベル**: `dependencies`, `renovate`
 - **Dependency Dashboard**: 有効
+- **postUpdateOptions**: `pnpmDedupe`（更新後に `pnpm dedupe` を実行）
+- **osvVulnerabilityAlerts**: 有効（OSV ベースの脆弱性アラート）
+- **`@types/*`**: `group:definitelyTyped` でまとめて更新
 
 ### カスタムマネージャー
 
