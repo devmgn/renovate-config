@@ -1,10 +1,10 @@
 # renovate-config
 
-Renovate共通設定プリセット
+Renovate 共通設定プリセット
 
 ## 使い方
 
-各リポジトリの`renovate.json`に以下を設定:
+各リポジトリの `renovate.json`:
 
 ```json
 {
@@ -13,27 +13,36 @@ Renovate共通設定プリセット
 }
 ```
 
-## 設定内容
+## ポリシー
 
-- **ベース**: `config:best-practices`
-- **タイムゾーン**: Asia/Tokyo
-- **スケジュール**: 夜間（22時〜5時）
-- **platformAutomerge**: 有効（GitHub native automerge使用）
+- **ベース**: `config:best-practices`（推奨設定・Dependency Dashboard・`group:recommended`・各種 helpers をまとめて有効化）
+- **タイムゾーン**: Asia/Tokyo (`:timezone(Asia/Tokyo)`)
+- **スケジュール**: 平日業務時間外 + 週末 (`schedule:nonOfficeHours`)
+- **automerge スケジュール**: 同上 (`schedule:automergeNonOfficeHours`)
+- **automerge 方式**: GitHub native automerge (`platformAutomerge`)
 - **ラベル**: `dependencies`, `renovate`
-- **Dependency Dashboard**: 有効
-- **postUpdateOptions**: `pnpmDedupe`（更新後に `pnpm dedupe` を実行）
-- **osvVulnerabilityAlerts**: 有効（OSV ベースの脆弱性アラート）
-- **`@types/*`**: `group:definitelyTyped` でまとめて更新
+- **脆弱性アラート**: OSV ベース (`osvVulnerabilityAlerts`)
 
-### カスタムマネージャー
+## 自動マージ
 
-- `customManagers:biomeVersions`
-- `customManagers:githubActionsVersions`
+| 対象 | 動作 | 仕掛け |
+|---|---|---|
+| `@types/*` の patch / minor | PR を作って自動マージ | `:automergeTypes` |
+| lockfile maintenance | 週次（月曜未明）、PR を作らずブランチで直接マージ | `:maintainLockFilesWeekly` + `automergeType: branch` |
 
-### ロックファイルメンテナンス
+それ以外（通常の patch / minor / major）は手動レビュー。
 
-- 日曜夜間に自動実行・自動マージ
+## グルーピング
 
-### パッケージルール
+- `@types/*` を 1 PR にまとめる (`group:definitelyTyped`)
+- React / linters / monorepo / test 系などエコシステム別のグルーピングは `config:best-practices` 経由の `group:recommended` で有効
 
-- patchアップデートをグループ化
+## GitHub Actions
+
+- バージョン文字列の同期: `customManagers:githubActionsVersions`
+- SHA digest pin: `helpers:pinGitHubActionDigests`（`config:best-practices` 経由で有効）
+- digest 更新を SemVer 認識させる: `helpers:pinGitHubActionDigestsToSemver`
+
+## パッケージマネージャー
+
+- pnpm: 更新後に `pnpm dedupe` を実行 (`postUpdateOptions: ["pnpmDedupe"]`)。npm / yarn 利用時は no-op

@@ -1,28 +1,22 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
+    ":automergeTypes",
+    ":maintainLockFilesWeekly",
     ":timezone(Asia/Tokyo)",
     "config:best-practices",
     "customManagers:githubActionsVersions",
-    "group:definitelyTyped"
+    "group:definitelyTyped",
+    "helpers:pinGitHubActionDigestsToSemver",
+    "schedule:automergeNonOfficeHours",
+    "schedule:nonOfficeHours"
   ],
-  "dependencyDashboard": true,
   "labels": ["dependencies", "renovate"],
   "osvVulnerabilityAlerts": true,
   "platformAutomerge": true,
   "postUpdateOptions": ["pnpmDedupe"],
-  "schedule": ["after 10pm", "before 5am"],
-  "automergeSchedule": ["after 10pm", "before 5am"],
   "lockFileMaintenance": {
-    "enabled": true,
     "automerge": true,
-    "automergeType": "branch",
-    "schedule": ["after 10pm on sunday", "before 5am on sunday"]
-  },
-  "packageRules": [
-    {
-      "groupName": "patch dependencies",
-      "matchUpdateTypes": ["patch"]
-    }
-  ]
+    "automergeType": "branch"
+  }
 }
