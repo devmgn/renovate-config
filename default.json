@@ -3,6 +3,7 @@
   "extends": [
     ":automergeTypes",
     ":maintainLockFilesWeekly",
+    ":rebaseStalePrs",
     ":timezone(Asia/Tokyo)",
     "config:best-practices",
     "customManagers:githubActionsVersions",

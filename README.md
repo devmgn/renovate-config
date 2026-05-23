@@ -20,6 +20,7 @@ Renovate 共通設定プリセット
 - **スケジュール**: 平日業務時間外 + 週末 (`schedule:nonOfficeHours`)
 - **automerge スケジュール**: 同上 (`schedule:automergeNonOfficeHours`)
 - **automerge 方式**: GitHub native automerge (`platformAutomerge`)
+- **リベース**: base ブランチ更新時に PR を常にリベース (`:rebaseStalePrs`)
 - **ラベル**: `dependencies`, `renovate`
 - **脆弱性アラート**: OSV ベース (`osvVulnerabilityAlerts`)
 
