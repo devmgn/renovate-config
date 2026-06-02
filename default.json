@@ -2,13 +2,13 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     ":automergeTypes",
-    ":maintainLockFilesWeekly",
     ":rebaseStalePrs",
     ":timezone(Asia/Tokyo)",
     "config:best-practices",
     "customManagers:githubActionsVersions",
     "group:definitelyTyped",
     "helpers:pinGitHubActionDigestsToSemver",
+    "mergeConfidence:all-badges",
     "schedule:automergeNonOfficeHours",
     "schedule:nonOfficeHours"
   ],
@@ -19,5 +19,14 @@
   "lockFileMaintenance": {
     "automerge": true,
     "automergeType": "branch"
-  }
+  },
+  "packageRules": [
+    {
+      "matchSourceUrls": [
+        "https://github.com/oxc-project/oxc",
+        "https://github.com/oxc-project/tsgolint"
+      ],
+      "groupName": "oxc toolchain"
+    }
+  ]
 }
