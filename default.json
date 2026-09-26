@@ -16,10 +16,6 @@
   "osvVulnerabilityAlerts": true,
   "platformAutomerge": true,
   "postUpdateOptions": ["pnpmDedupe"],
-  "lockFileMaintenance": {
-    "automerge": true,
-    "automergeType": "branch"
-  },
   "packageRules": [
     {
       "matchSourceUrls": [
